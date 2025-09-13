@@ -13,6 +13,7 @@ end
 function meta:GetUTime()
 	return self:GetNW2Int("TotalUTime")
 end
+
 function meta:GetUTimeStart()
 	return self:GetNW2Int("UTimeStart")
 end
