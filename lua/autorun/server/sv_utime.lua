@@ -5,13 +5,12 @@ hook.Add("PlayerInitialSpawn", "UTime_Initialize", function(ply)
 	local row = sql.QueryTyped("SELECT totaltime FROM utime WHERE id = ?", steamid)[1]
 	local time = row and row.totaltime
 
-	if not time then
+	if time then
+		ply:SetUTime(time)
+	else
 		sql.QueryTyped("INSERT INTO utime VALUES (?, ?)", steamid, 0)
-		time = 0
+		ply:SetUTime(0)
 	end
-
-	ply:SetUTimeStart(CurTime())
-	ply:SetUTime(time)
 end)
 
 timer.Create("UTime_TimeUpdater", 60, 0, function()
