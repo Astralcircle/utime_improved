@@ -2,12 +2,12 @@ local meta = FindMetaTable("Player")
 
 if SERVER then
 	function meta:SetUTime(num)
-		self:SetNW2Int("TotalUTime", num)
+		self:SetCBInt("TotalUTime", num)
 	end
 end
 
 function meta:GetUTime()
-	return self:GetNW2Int("TotalUTime")
+	return self:GetCBInt("TotalUTime")
 end
 
 function meta:GetUTimeSessionTime()
