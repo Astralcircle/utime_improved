@@ -11,11 +11,13 @@ hook.Add("PlayerInitialSpawn", "UTime_Initialize", function(ply)
 		sql.QueryTyped("INSERT INTO utime VALUES (?, ?)", steamid, 0)
 		ply:SetUTime(0)
 	end
+
+	ply.UTime_Initialize = true
 end)
 
 timer.Create("UTime_TimeUpdater", 60, 0, function()
 	for _, ply in player.Iterator() do
-		if ply:IsConnected() then
+		if ply.UTime_Initialize then
 			sql.QueryTyped("UPDATE utime SET totaltime = ? WHERE id = ?", math.floor(ply:GetUTimeTotalTime()), ply:SteamID64())
 		end
 	end
